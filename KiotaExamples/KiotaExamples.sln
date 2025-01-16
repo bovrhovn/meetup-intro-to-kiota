@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kiota.QuickStart", "Kiota.QuickStart\Kiota.QuickStart.csproj", "{449C485F-9187-4A8A-9DB2-D59A544F6400}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CLI", "CLI", "{DC3B31DE-C08A-4735-B8BD-7DE7FA26FF86}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{64C005CA-EC8E-4428-AD7B-85B34367E731}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kiota.Api", "Kiota.Api\Kiota.Api.csproj", "{2348923E-72C0-48AC-BBA3-1807B8339A1A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{449C485F-9187-4A8A-9DB2-D59A544F6400}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{449C485F-9187-4A8A-9DB2-D59A544F6400}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{449C485F-9187-4A8A-9DB2-D59A544F6400}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{449C485F-9187-4A8A-9DB2-D59A544F6400}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2348923E-72C0-48AC-BBA3-1807B8339A1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2348923E-72C0-48AC-BBA3-1807B8339A1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2348923E-72C0-48AC-BBA3-1807B8339A1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2348923E-72C0-48AC-BBA3-1807B8339A1A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{449C485F-9187-4A8A-9DB2-D59A544F6400} = {DC3B31DE-C08A-4735-B8BD-7DE7FA26FF86}
+		{2348923E-72C0-48AC-BBA3-1807B8339A1A} = {64C005CA-EC8E-4428-AD7B-85B34367E731}
+	EndGlobalSection
+EndGlobal

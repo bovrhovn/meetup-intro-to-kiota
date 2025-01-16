@@ -1,0 +1,5 @@
+### checking availability
+GET {{url}}/health/
+Accept: application/json
+
+###
