@@ -1,0 +1,7 @@
+### checking availability for the project
+GET {{url}}/health/
+Accept: application/json
+
+### checking availability for the data controller
+GET {{url}}/data/health/
+Accept: application/json

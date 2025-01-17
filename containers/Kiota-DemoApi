@@ -1,0 +1,15 @@
+﻿FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+COPY ["Kiota.Api/", "Kiota.Api/"]
+RUN dotnet restore "Kiota.Api/Kiota.Api.csproj"
+COPY . .
+RUN dotnet restore "Kiota.Api/Kiota.Api.csproj"
+RUN dotnet build "Kiota.Api/Kiota.Api.csproj" -c Release -o /app
+
+FROM build AS publish
+RUN dotnet publish "Kiota.Api/Kiota.Api.csproj" -c Release -o /app
+
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 as final
+WORKDIR /app
+ENV ASPNETCORE_HTTP_PORTS=80
+COPY --from=publish /app .
+ENTRYPOINT ["dotnet", "Kiota.Api.dll"]

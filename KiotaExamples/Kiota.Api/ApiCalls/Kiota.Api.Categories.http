@@ -1,0 +1,3 @@
+﻿### get all categories
+GET {{url}}/categories/all
+Accept: application/json
