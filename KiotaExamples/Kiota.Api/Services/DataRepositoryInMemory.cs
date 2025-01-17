@@ -5,16 +5,20 @@ namespace Kiota.Api.Services;
 public abstract class DataRepositoryInMemory<T>(string dataRepoName, IMemoryCache memoryCache)
     where T : class
 {
-    protected List<T>? GetFromMemoryCache() => memoryCache.TryGetValue(dataRepoName, out List<T>? data) ? data : [];
-    public virtual List<T>? GetAll() => GetFromMemoryCache();
-    public virtual bool Add(T item)
+    private List<T>? GetFromMemoryCache() => memoryCache.TryGetValue(dataRepoName, out List<T>? data) ? data : [];
+    
+    public abstract void Init();
+    protected void SetData(List<T> data) => memoryCache.Set(dataRepoName, data);
+
+    public List<T>? GetAll() => GetFromMemoryCache();
+    public bool Add(T item)
     {
         var list = GetFromMemoryCache();
         list?.Add(item);
         memoryCache.Set(dataRepoName, list);
         return true;
     }
-    public virtual bool UpdateOrInsert(T item)
+    public bool UpdateOrInsert(T item)
     {
         var list = GetFromMemoryCache();
         if ((bool)list?.Contains(item))
@@ -29,7 +33,7 @@ public abstract class DataRepositoryInMemory<T>(string dataRepoName, IMemoryCach
         memoryCache.Set(dataRepoName, list);
         return true;
     }
-    public virtual bool Delete(T item)
+    public bool Delete(T item)
     {
         var list = GetFromMemoryCache();
         list?.Remove(item);

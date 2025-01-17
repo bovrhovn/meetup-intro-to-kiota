@@ -5,8 +5,18 @@ using Microsoft.AspNetCore.Mvc;
 namespace Kiota.Api.Controllers;
 
 [ApiController, Route(RouteHelper.CategoryControllerRoute)]
-public class CategoryController(ILogger<CategoryController> logger, CategoryService categoryService) : ControllerBase
+public class CategoryController : ControllerBase
 {
+    private readonly ILogger<CategoryController> logger;
+    private readonly CategoryService categoryService;
+
+    public CategoryController(ILogger<CategoryController> logger, CategoryService categoryService)
+    {
+        this.logger = logger;
+        this.categoryService = categoryService;
+        categoryService.Init(); //add some data to the service
+    }
+
     [HttpGet]
     [Route(RouteHelper.AllRoute)]
     [EndpointSummary("This gets all categories")]
