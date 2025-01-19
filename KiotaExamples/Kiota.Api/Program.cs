@@ -13,11 +13,16 @@ builder.Services.AddOptions<WebAppOptions>().Bind(builder.Configuration.GetSecti
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
     options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto);
 builder.Services.AddOpenApi();
+builder.Services.AddHealthChecks();
+
+//adding services to the DI container
 builder.Services.AddMemoryCache();
-builder.Services.AddSingleton<CategoryService>();
+builder.Services.AddSingleton<CategoryServiceInMemory>();
+builder.Services.AddSingleton<ProjectServiceInMemory>();
+
+//configure the JSON serializer to ignore reference loops
 builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
-builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 

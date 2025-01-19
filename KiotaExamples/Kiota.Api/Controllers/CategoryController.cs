@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Kiota.Api.Controllers;
 
 [ApiController, Route(RouteHelper.CategoryControllerRoute)]
-public class CategoryController(ILogger<CategoryController> logger, CategoryService categoryService) : ControllerBase
+public class CategoryController(ILogger<CategoryController> logger, 
+    CategoryServiceInMemory categoryServiceInMemory) : ControllerBase
 {
     [HttpGet]
     [Route(RouteHelper.AllRoute)]
@@ -15,9 +16,21 @@ public class CategoryController(ILogger<CategoryController> logger, CategoryServ
     public IActionResult GetAllCategories()
     {
         logger.LogInformation("Called get all categories endpoint at {DateCalled}", DateTime.UtcNow);
-        var list = categoryService.GetAll();
+        var list = categoryServiceInMemory.GetAll();
         logger.LogInformation("Returning {Count} categories", list?.Count);
         return Ok(list);
+    }
+    
+    [HttpPost]
+    [Route(RouteHelper.InitRoute)]
+    [EndpointSummary("This inits categories in memory")]
+    [EndpointDescription("This get random data using library Bogus in memory implementation for random categories.")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public IActionResult InitProjects()
+    {
+        logger.LogInformation("Called init categories endpoint at {DateCalled}", DateTime.UtcNow);
+        categoryServiceInMemory.InitData();
+        return Ok();
     }
     
     [HttpGet]

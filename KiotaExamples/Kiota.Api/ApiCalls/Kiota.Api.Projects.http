@@ -1,0 +1,7 @@
+﻿### get randomg projects
+GET {{url}}/projects/random
+Accept: application/json
+
+### get all proejct based on category provided
+GET {{url}}/projects/by-category
+Accept: application/json
