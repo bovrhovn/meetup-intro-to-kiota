@@ -37,7 +37,8 @@ public abstract class DataRepositoryInMemory<T>(string dataRepoName,
     public bool UpdateOrInsert(T item)
     {
         var list = GetFromMemoryCache();
-        if ((bool)list?.Contains(item))
+        ArgumentNullException.ThrowIfNull(list);
+        if (list.Contains(item))
         {
             logger.LogInformation("Removing item from the cache and re-adding it");
             list.Remove(item); //re-add item
