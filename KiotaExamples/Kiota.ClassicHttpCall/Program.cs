@@ -7,7 +7,6 @@ Console.WriteLine("Enter to start reading data...");
 Console.ReadLine();
 //populate the data into memory
 await client.PostAsync("categories/init", null);
-
 //show to the user
 var response = await client.GetAsync("categories/all");
 response.EnsureSuccessStatusCode();

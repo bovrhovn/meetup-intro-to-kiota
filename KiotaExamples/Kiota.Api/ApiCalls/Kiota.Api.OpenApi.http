@@ -1,0 +1,8 @@
+### get open api for the api
+GET {{url}}/openapi/v1.json
+
+### get open api for the api
+GET {{url}}/openapi/kiota-api.json
+    
+### View ScalarUI
+GET {{url}}/scalar/v1

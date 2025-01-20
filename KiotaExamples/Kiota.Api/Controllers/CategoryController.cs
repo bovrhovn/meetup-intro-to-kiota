@@ -1,16 +1,20 @@
 ﻿using Kiota.Api.Helpers;
 using Kiota.Api.Models;
 using Kiota.Api.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Kiota.Api.Controllers;
 
-[ApiController, Route(RouteHelper.CategoryControllerRoute)]
-public class CategoryController(ILogger<CategoryController> logger, 
+[AllowAnonymous, ApiController, Route(RouteHelper.CategoryControllerRoute),
+ Produces("application/json")]
+public class CategoryController(
+    ILogger<CategoryController> logger,
     CategoryServiceInMemory categoryServiceInMemory) : ControllerBase
 {
     [HttpGet]
     [Route(RouteHelper.AllRoute)]
+    [EndpointName("GetAllCategories")]
     [EndpointSummary("This gets all categories")]
     [EndpointDescription("This is gets all categories from memory and returns that to user.")]
     [EndpointGroupName("Categories")]
@@ -23,20 +27,21 @@ public class CategoryController(ILogger<CategoryController> logger,
         logger.LogInformation("Returning {Count} categories", list?.Count);
         return Ok(list);
     }
-    
+
     [HttpPost]
     [Route(RouteHelper.InitRoute)]
+    [EndpointName("InitCategories")]
     [EndpointSummary("This inits categories in memory")]
     [EndpointDescription("This get random data using library Bogus in memory implementation for random categories.")]
     [EndpointGroupName("Categories")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public IActionResult InitProjects()
+    public IActionResult InitCategories()
     {
         logger.LogInformation("Called init categories endpoint at {DateCalled}", DateTime.UtcNow);
         categoryServiceInMemory.InitData();
         return Ok();
     }
-    
+
     [HttpGet]
     [Route(RouteHelper.HealthRoute)]
     [EndpointSummary("This is a health check for the categories controller.")]

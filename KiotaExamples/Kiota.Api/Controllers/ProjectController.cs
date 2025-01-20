@@ -1,4 +1,5 @@
-﻿using Bogus;
+﻿using System.ComponentModel;
+using Bogus;
 using Kiota.Api.Helpers;
 using Kiota.Api.Models;
 using Kiota.Api.Options;
@@ -8,7 +9,8 @@ using Microsoft.Extensions.Options;
 
 namespace Kiota.Api.Controllers;
 
-[ApiController, Route(RouteHelper.ProjectControllerRoute)]
+[ApiController, Route(RouteHelper.ProjectControllerRoute),
+Produces("application/json")]
 public class ProjectController(
     ILogger<ProjectController> logger,
     IOptions<WebAppOptions> webAppOptionsValue,
@@ -18,6 +20,7 @@ public class ProjectController(
 {
     [HttpPost]
     [Route(RouteHelper.InitRoute)]
+    [EndpointName("InitProjects")]
     [EndpointSummary("This inits projects in memory")]
     [EndpointDescription("This get random data using library Bogus in memory implementation for random projects.")]
     [EndpointGroupName("Projects")]
@@ -31,6 +34,7 @@ public class ProjectController(
 
     [HttpGet]
     [Route(RouteHelper.RandomRoute)]
+    [EndpointName("GetProjectsRandomData")]
     [EndpointSummary("This get random project data for the model.")]
     [EndpointDescription("This get random data using library Bogus to get projects based on provided data.")]
     [EndpointGroupName("Projects")]
@@ -55,12 +59,13 @@ public class ProjectController(
 
     [HttpGet]
     [Route(RouteHelper.ProjectsByCategoryRoute + "/{categoryId}")]
+    [EndpointName("GetProjectsByCategory")]
     [EndpointSummary("This get projects based on category id.")]
     [EndpointDescription("This get project data using library Bogus based on provided category.")]
     [EndpointGroupName("Projects")]
     [Produces(typeof(List<Project>))]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public IActionResult GetProjectsByCategoryAsync(string categoryId)
+    public IActionResult GetProjectsByCategoryAsync([Description("Category GUID identificator")]string categoryId)
     {
         logger.LogInformation(
             "Called get projects by category endpoint at {DateCalled} to get {CategoryId} results back",

@@ -7,12 +7,32 @@ using Kiota.Api.Services;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.HttpOverrides;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOptions<WebAppOptions>().Bind(builder.Configuration.GetSection("WebAppOptions"));
-builder.Services.Configure<ForwardedHeadersOptions>(options =>
-    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto);
-builder.Services.AddOpenApi();
+ builder.Services.Configure<ForwardedHeadersOptions>(options =>
+     options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto);
+builder.Services.AddOpenApi(options =>
+{
+    options.AddDocumentTransformer((document, context, cancellationToken) =>
+    {
+        document.Info = new()
+        {
+            Title = "Categories and Projects API",
+            Version = "v1",
+            Description = "API for demonstrating how Kiota works.",
+            Contact = new()
+            {
+                Name = "Kiota Demos",
+                Email = "bovrhovn@microsoft.com"
+            }
+        };
+        return Task.CompletedTask;
+    });
+});
+builder.Services.AddOpenApi("kiota-api");
+builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddHealthChecks();
 
 //adding services to the DI container
@@ -20,16 +40,15 @@ builder.Services.AddMemoryCache();
 builder.Services.AddSingleton<CategoryServiceInMemory>();
 builder.Services.AddSingleton<ProjectServiceInMemory>();
 
-//configure the JSON serializer to ignore reference loops
 builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 var app = builder.Build();
-
+app.UseRouting();
 app.UseForwardedHeaders();
 app.UseHttpsRedirection();
-app.UseRouting();
 app.MapOpenApi();
+app.MapScalarApiReference();
 app.MapControllers();
 app.UseExceptionHandler(options =>
 {
@@ -45,7 +64,6 @@ app.UseExceptionHandler(options =>
         }
     });
 });
-
 app.MapHealthChecks($"/{RouteHelper.HealthRoute}", new HealthCheckOptions
 {
     Predicate = _ => true, ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
