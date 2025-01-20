@@ -1,4 +1,5 @@
 ﻿using Kiota.Api.Helpers;
+using Kiota.Api.Models;
 using Kiota.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,7 +13,9 @@ public class CategoryController(ILogger<CategoryController> logger,
     [Route(RouteHelper.AllRoute)]
     [EndpointSummary("This gets all categories")]
     [EndpointDescription("This is gets all categories from memory and returns that to user.")]
+    [EndpointGroupName("Categories")]
     [ProducesResponseType(StatusCodes.Status200OK)]
+    [Produces(typeof(List<Category>))]
     public IActionResult GetAllCategories()
     {
         logger.LogInformation("Called get all categories endpoint at {DateCalled}", DateTime.UtcNow);
@@ -25,6 +28,7 @@ public class CategoryController(ILogger<CategoryController> logger,
     [Route(RouteHelper.InitRoute)]
     [EndpointSummary("This inits categories in memory")]
     [EndpointDescription("This get random data using library Bogus in memory implementation for random categories.")]
+    [EndpointGroupName("Categories")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public IActionResult InitProjects()
     {
@@ -37,11 +41,12 @@ public class CategoryController(ILogger<CategoryController> logger,
     [Route(RouteHelper.HealthRoute)]
     [EndpointSummary("This is a health check for the categories controller.")]
     [EndpointDescription("This is a health check for the categories controller to see if API is online.")]
+    [EndpointGroupName("Health")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public IActionResult IsAlive()
     {
         logger.LogInformation("Called alive data endpoint at {DateCalled}", DateTime.UtcNow);
         return new ContentResult
-            { StatusCode = 200, Content = $"I am alive at {DateTime.Now} on {Environment.MachineName}" };
+            { StatusCode = 200, Content = $"I am alive at {DateTime.Now} on {Environment.MachineName} for categories" };
     }
 }
