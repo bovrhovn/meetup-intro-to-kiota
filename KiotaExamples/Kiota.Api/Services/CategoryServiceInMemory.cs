@@ -15,6 +15,8 @@ public class CategoryServiceInMemory(
     public override void InitData()
     {
         var categories = new Faker<Category>()
+            .RuleFor(x => x.CategoryId, f => f.Random.Guid().ToString())
+            .RuleFor(x => x.Name, f => f.Commerce.ProductName())
             .Generate(webAppOptionsValue.Value.DataCount);
         AddRange(categories.ToArray());
     }

@@ -2,6 +2,10 @@
 GET {{url}}/health/
 Accept: application/json
 
-### checking availability for the data controller
-GET {{url}}/data/health/
+### checking availability for the categories controller
+GET {{url}}/categories/health/
+Accept: application/json
+
+### checking availability for the projects controller
+GET {{url}}/projects/health/
 Accept: application/json
