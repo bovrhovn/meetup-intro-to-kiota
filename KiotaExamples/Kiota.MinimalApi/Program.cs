@@ -4,6 +4,7 @@ using Kiota.MinimalApi.Options;
 using Kiota.MinimalApi.Services;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.OpenApi.Models;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,6 +36,18 @@ builder.Services.AddOpenApi(options =>
                 Email = "kiota@thisiscool.com"
             }
         };
+        var localServer = new OpenApiServer
+        {
+            Description = "Local server for development purposes",
+            Url = Environment.GetEnvironmentVariable("ASPNETCORE_URLS") ?? "https://localhost:5010"
+        };
+        document.Servers.Add(localServer);
+        var prodServer = new OpenApiServer
+        {
+            Description = "Production server",
+            Url = Environment.GetEnvironmentVariable("PROD_URL") ?? "https://kiota.example.com"
+        };
+        document.Servers.Add(prodServer);
         return Task.CompletedTask;
     });
 });
