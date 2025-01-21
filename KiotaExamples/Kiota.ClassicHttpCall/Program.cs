@@ -1,31 +1,36 @@
 ﻿using System.Text.Json;
+using Spectre.Console;
 
-Console.WriteLine("Calling HTTP classical way!");
+AnsiConsole.WriteLine("Calling HTTP classical way!");
+var url = Environment.GetEnvironmentVariable("API_URL") ?? "https://localhost:5010";
 var client = new HttpClient();
-client.BaseAddress = new Uri("https://localhost:5008");
-Console.WriteLine("Enter to start reading data...");
-Console.ReadLine();
-//populate the data into memory
+client.BaseAddress = new Uri(url);
+var choice = AnsiConsole.Prompt(new ConfirmationPrompt("Start with adding the data to the system?") { ShowChoices = false });
+if (!choice)
+{
+    AnsiConsole.Write("Skipping data initialization, [red]exiting[/]...");
+    return;
+}
+
 await client.PostAsync("categories/init", null);
-//show to the user
 var response = await client.GetAsync("categories/all");
 response.EnsureSuccessStatusCode();
-Console.WriteLine("Receiving response....");
+AnsiConsole.WriteLine("Receiving response....");
 var content = await response.Content.ReadAsStringAsync();
-Console.WriteLine("Found the following >>>> ");
+AnsiConsole.WriteLine("Found the following data:");
 if (!string.IsNullOrEmpty(content))
 {
-    //deserialize the content to list of category records
     var categories = JsonSerializer.Deserialize<List<CategoryModel>>(content);
     ArgumentNullException.ThrowIfNull(categories);
-    foreach (var category in categories)
-    {
-        Console.WriteLine($"Category Id: {category.categoryId}, Name: {category.name}");
-    }
+    var table = new Table();
+    table.AddColumn("Category Id");
+    table.AddColumn("Name", c => c.Centered());
+    foreach (var category in categories) table.AddRow(category.categoryId, category.name);
+    AnsiConsole.Write(table);
 }
 else
 {
-    Console.WriteLine("No results found");
+    AnsiConsole.Write("[red]No results[/] found");
 }
 
 internal record CategoryModel(string categoryId, string name);

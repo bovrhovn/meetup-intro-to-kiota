@@ -12,8 +12,8 @@ if (!confirmation)
     return;
 }
 
-var openApiSpec = await new HttpClient { BaseAddress = new Uri(url) }.GetStringAsync("openapi/kiota-api.json");
-AnsiConsole.WriteLine("OpenAPI Spec: " + openApiSpec);
+var openApiSpec = await new HttpClient { BaseAddress = new Uri(url) }.GetStringAsync("openapi/v1.json");
+//AnsiConsole.WriteLine("OpenAPI Spec: " + openApiSpec);
 if (string.IsNullOrEmpty(openApiSpec))
 {
     Console.WriteLine("Failed to retrieve OpenAPI Spec");
@@ -30,8 +30,12 @@ if (diagnostic.Errors.Count > 0)
 var table = new Table();
 table.AddColumn("Title");
 table.AddColumn(new TableColumn("Api paths").Centered());
+table.AddColumn(new TableColumn("Components").Centered());
 var pathKeys = "Paths:" + Environment.NewLine;
 openApiDocument.Paths.Keys.ToList()
     .ForEach(currentPath => pathKeys += currentPath + Environment.NewLine);
-table.AddRow(openApiDocument.Info.Title, pathKeys);
+var componentKeys = "Components:" + Environment.NewLine;
+openApiDocument.Components.Schemas.Keys.ToList()
+    .ForEach(currentComponent => componentKeys += currentComponent + Environment.NewLine);
+table.AddRow(openApiDocument.Info.Title, componentKeys);
 AnsiConsole.Write(table);
