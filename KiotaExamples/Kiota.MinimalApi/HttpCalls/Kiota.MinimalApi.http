@@ -1,0 +1,5 @@
+### call health check
+GET {{url}}/health/
+Accept: application/json
+
+###

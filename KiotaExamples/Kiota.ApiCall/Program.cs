@@ -2,7 +2,7 @@
 using Spectre.Console;
 
 AnsiConsole.WriteLine("Calling Open API to generate call to our own API");
-var url = Environment.GetEnvironmentVariable("API_URL") ?? "https://localhost:5008";
+var url = Environment.GetEnvironmentVariable("API_URL") ?? "https://localhost:5010";
 AnsiConsole.MarkupLine($"[bold]API URL[/]: [link]{url}[/]");
 var confirmation = AnsiConsole.Prompt(new ConfirmationPrompt("Is this the correct URL to get OpenApi from?")
     { ShowChoices = false });

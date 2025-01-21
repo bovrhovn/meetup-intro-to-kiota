@@ -1,10 +1,10 @@
 ﻿using Bogus;
-using Kiota.Api.Models;
-using Kiota.Api.Options;
+using Kiota.MinimalApi.Models;
+using Kiota.MinimalApi.Options;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 
-namespace Kiota.Api.Services;
+namespace Kiota.MinimalApi.Services;
 
 public class ProjectServiceInMemory(IMemoryCache cache, ILogger<ProjectServiceInMemory> logger,
     IOptions<WebAppOptions> webAppOptionsValue, CategoryServiceInMemory categoryServiceInMemory)

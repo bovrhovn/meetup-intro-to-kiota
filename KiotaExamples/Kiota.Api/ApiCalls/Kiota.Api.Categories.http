@@ -1,8 +1,0 @@
-﻿### initialize categories with random data
-POST {{url}}/categories/init
-Accept: application/json
-
-### get all categories
-GET {{url}}/categories/all
-Accept: application/json
-

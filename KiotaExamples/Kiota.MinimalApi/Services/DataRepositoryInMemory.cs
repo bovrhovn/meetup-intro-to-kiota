@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 
-namespace Kiota.Api.Services;
+namespace Kiota.MinimalApi.Services;
 
 public abstract class DataRepositoryInMemory<T>(string dataRepoName, 
     IMemoryCache memoryCache, ILogger logger)
