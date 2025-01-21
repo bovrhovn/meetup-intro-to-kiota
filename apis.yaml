@@ -1,0 +1,11 @@
+name: Microsoft Kiota Example Apis
+description: This repository contains the OpenAPI definitions for demos for Microsoft Kiota.
+tags:
+  - kiota
+apis:
+  - name: Microsoft Kiota Example API
+    description: The Microsoft Example API provides a simple API to demonstrate the capabilities of Microsoft Kiota.
+    baseUrl: https://meetup-intro-to-kiota-web.lemonbush-cf0a43b7.swedencentral.azurecontainerapps.io
+    properties:
+      - type: x-openapi
+        url: https://meetup-intro-to-kiota-web.lemonbush-cf0a43b7.swedencentral.azurecontainerapps.io/openapi/v1.json
