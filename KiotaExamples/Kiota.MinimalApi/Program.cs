@@ -56,7 +56,14 @@ var app = builder.Build();
 
 app.MapOpenApi();
 // to view scalar data go to https://localhost:<port>/scalar/v1
-app.MapScalarApiReference();
+app.MapScalarApiReference(options =>
+{
+    options
+        .WithTitle("Kiota Example API")
+        .WithDownloadButton(true)
+        .WithTheme(ScalarTheme.BluePlanet)
+        .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient);
+});
 
 app.MapGroup(RouteHelper.CategoryControllerRoute)
     .MapCategoriesApi()
@@ -71,6 +78,4 @@ app.MapHealthChecks($"/{RouteHelper.HealthRoute}", new HealthCheckOptions
     Predicate = _ => true, ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
 }).AllowAnonymous();
 app.UseForwardedHeaders();
-
 app.Run();
-

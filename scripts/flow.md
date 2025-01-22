@@ -1,19 +1,19 @@
 ﻿## Flow for the session
 
-1. Introduction to the session about Microsoft Kiota
+1. Introduction to the session about Microsoft Kiota (30 mins)
 
-2. OpenAPI overview:
-   - Demonstrating how to add support in the app for OpenAPI
-   - demonstrating how to read "classical" way of calling HTTP client API
-   - demonstrating how to read OpenAPI way of calling HTTP client API via stream
+2. OpenAPI overview (10 mins):
+   - Demonstrating how to add support in the app for OpenAPI (Kiota.MinimalApi)
+   - demonstrating how to read "classical" way of calling HTTP client API (Kiota.ClassicalHttpCall)
+   - demonstrating how to read OpenAPI way of calling HTTP client API via stream (Kiota.OpenApiCall)
 
-3. Microsoft Kiota Overview:
+3. Microsoft Kiota Overview (15 mins):
    - Explaining how Kiota works and differences from other API client generators 
    - Command line tool demonstration
    - Demonstrating how to generate clients data code
    - Demonstrating how to use the generated clients
 
-4. Q & A
+4. Q & A (5 mins)
 
 ## How Kiota Works
 
@@ -44,10 +44,17 @@ kiota show -d https://localhost:5010/openapi/v1.json -k "categories"
 # showcase languages supported to used them in app 
 kiota info
 
+# show what you need from dependencies to use the generated code
+kiota info -l CSharp
+
 # generate code for c#
 Set-Location c:\Work\
 New-Item -ItemType Directory -Path ./FolderForGeneratedCode
 kiota generate -l CSharp -c SampleApiClient -n SampleApiClient.RestApiCalls -d https://localhost:5010/openapi/v1.json -o ./FolderForGeneratedCode
+
+# showcase Kiota.SimpleApiCall usage
+
+
 
 ```
 
