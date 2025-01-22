@@ -2,16 +2,18 @@
 
 1. Introduction to the session about Microsoft Kiota (30 mins)
 
-2. OpenAPI overview (10 mins):
+2. OpenAPI overview (8-10 mins):
    - Demonstrating how to add support in the app for OpenAPI (Kiota.MinimalApi)
-   - demonstrating how to read "classical" way of calling HTTP client API (Kiota.ClassicalHttpCall)
+   - demonstrating how to read "classical" way of calling HTTP client API (Kiota.ClassicalHttpCall) 
    - demonstrating how to read OpenAPI way of calling HTTP client API via stream (Kiota.OpenApiCall)
 
 3. Microsoft Kiota Overview (15 mins):
    - Explaining how Kiota works and differences from other API client generators 
-   - Command line tool demonstration
-   - Demonstrating how to generate clients data code
+   - Command line tool demonstration (calls below)
+   - Demonstrating how to generate clients data code (Kiota.QuickStart, Kiota.SimpleApiCall)
    - Demonstrating how to use the generated clients
+     - Authentication Example (Kiota.AuthenticationExample)
+     - using automation and serialization with Kiota (Kiota.ApiCall)
 
 4. Q & A (5 mins)
 
@@ -38,8 +40,9 @@
 Api usage is defined [here](https://learn.microsoft.com/en-us/openapi/kiota/using).
 
 ``` powershell
-# search api
-kiota show -d https://localhost:5010/openapi/v1.json -k "categories"
+# search api on Github (show index and explanation)
+kiota search github
+kiota search Kiota
 
 # showcase languages supported to used them in app 
 kiota info
@@ -47,14 +50,13 @@ kiota info
 # show what you need from dependencies to use the generated code
 kiota info -l CSharp
 
+# search api
+kiota show -d https://localhost:5010/openapi/v1.json -k "categories"
+
 # generate code for c#
 Set-Location c:\Work\
 New-Item -ItemType Directory -Path ./FolderForGeneratedCode
 kiota generate -l CSharp -c SampleApiClient -n SampleApiClient.RestApiCalls -d https://localhost:5010/openapi/v1.json -o ./FolderForGeneratedCode
-
-# showcase Kiota.SimpleApiCall usage
-
-
 
 ```
 
