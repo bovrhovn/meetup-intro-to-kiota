@@ -29,7 +29,7 @@ await client.Categories.Init.PostAsync();
 var categories = await client.Categories.All.GetAsync();
 if (categories == null)
 {
-    AnsiConsole.WriteLine("Failed to retrieve categories");
+    AnsiConsole.MarkupLine("Failed to [bold red]retrieve[/] categories");
     return;
 }
 categories.ForEach(currentCategory => 

@@ -8,7 +8,7 @@ var confirmation = AnsiConsole.Prompt(new ConfirmationPrompt("Is this the correc
     { ShowChoices = false });
 if (!confirmation)
 {
-    AnsiConsole.Write("Please set the [red]API_URL[/] environment variable to the correct URL");
+    AnsiConsole.Write(new Markup("Please set the [red]API_URL[/] environment variable to the correct URL"));
     return;
 }
 

@@ -8,7 +8,7 @@ client.BaseAddress = new Uri(url);
 var choice = AnsiConsole.Prompt(new ConfirmationPrompt("Start with adding the data to the system?") { ShowChoices = false });
 if (!choice)
 {
-    AnsiConsole.Write("Skipping data initialization, [red]exiting[/]...");
+    AnsiConsole.Write(new Markup("Skipping data initialization, [red]exiting[/]..."));
     return;
 }
 
@@ -30,7 +30,7 @@ if (!string.IsNullOrEmpty(content))
 }
 else
 {
-    AnsiConsole.Write("[red]No results[/] found");
+    AnsiConsole.Write(new Markup("[red]No results[/] found"));
 }
 
 internal record CategoryModel(string categoryId, string name);
