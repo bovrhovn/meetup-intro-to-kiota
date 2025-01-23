@@ -19,19 +19,3 @@ if (!confirmation)
 // generate client from openapi spec provided by the minimal api
 // kiota generate -d https://localhost:5010/openapi/v1.json -o ./Services -n Kiota.RestApi -l CSharp -c KiotaMinimalApiClient --skip-generation-if-type-exists
 // run the client to get the categories
-var authenticationProvider = new AnonymousAuthenticationProvider();
-var client = new Kiota.RestApi.KiotaMinimalApiClient(new HttpClientRequestAdapter(authenticationProvider));
-var categoriesTable = new Table();
-categoriesTable.AddColumn("Category Id");
-categoriesTable.AddColumn("Name");
-//load temp data
-await client.Categories.Init.PostAsync();
-var categories = await client.Categories.All.GetAsync();
-if (categories == null)
-{
-    AnsiConsole.MarkupLine("Failed to [bold red]retrieve[/] categories");
-    return;
-}
-categories.ForEach(currentCategory => 
-    categoriesTable.AddRow(currentCategory.CategoryId!, currentCategory.Name!));
-AnsiConsole.Write(categoriesTable);

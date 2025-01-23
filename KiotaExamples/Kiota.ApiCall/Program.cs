@@ -13,5 +13,16 @@ if (!confirmation)
 }
 
 var openApiHelper = new OpenApiHelper();
-//output basic information about paths and components
-await openApiHelper.OutputInfo(url);
+await openApiHelper.OutputInfoAsync(url);
+
+var operationOptions = AnsiConsole.Prompt(
+    new SelectionPrompt<string>()
+        .Title("What do you want to do?")
+        .PageSize(3)
+        .AddChoices("Generate classes based on OpenAPI", "Generate client and do calls"));
+
+//generate the client and calls
+if (operationOptions == "Generate classes based on OpenAPI")
+    await openApiHelper.GenerateApiClientCalls();
+else
+    await openApiHelper.GetAllCategoriesAsync();

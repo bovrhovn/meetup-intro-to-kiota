@@ -1,0 +1,1 @@
+﻿kiota generate -d https://localhost:5010/openapi/v1.json -o ./Services -n Kiota.RestApi -l CSharp -c ApiClient
