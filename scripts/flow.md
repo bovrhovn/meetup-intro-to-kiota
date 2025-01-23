@@ -1,6 +1,8 @@
 ﻿## Flow for the session
 
-1. Introduction to the session about Microsoft Kiota (30 mins)
+1. Introduction to the session about Microsoft Kiota (1 minute)
+   - Briefly introduce the session and what will be covered.
+   - Mention that the session will include a demonstration of how to use Microsoft Kiota to generate API clients from OpenAPI descriptions.
 
 2. OpenAPI overview (8-10 mins):
    - Demonstrating how to add support in the app for OpenAPI (Kiota.MinimalApi)
@@ -13,9 +15,9 @@
    - Demonstrating how to generate clients data code (Kiota.QuickStart, Kiota.SimpleApiCall)
    - Demonstrating how to use the generated clients
      - Authentication Example (Kiota.AuthenticationExample)
-     - using automation and serialization with Kiota (Kiota.ApiCall)
+     - using automation, serialization and reflection with Kiota (Kiota.ApiCall)
 
-4. Q & A (5 mins)
+4. Q & A (4- 5 mins)
 
 ## How Kiota Works
 

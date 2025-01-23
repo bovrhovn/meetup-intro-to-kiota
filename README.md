@@ -57,9 +57,14 @@ The demo code is structured in the following way:
 2. [Kiota.ClassicalHttpCall](./KiotaExamples/Kiota.ClassicHttpCall) - project to call minimal api with classical http
    client.
 3. [Kiota.ApiCall](./KiotaExamples/Kiota.ApiCall) - project to call OpenAPI to see the data and programmatically show
-   them.
-4. [Kiota.QuickStart](./KiotaExamples/Kiota.QuickStart) - project to call sample OpenAPI to generate data from provided
+   activate them.
+4. [Kiota.OpenApiCall](./KiotaExamples/Kiota.OpenApiCall) - project to call OpenAPI to see the data and programmatically
+   show activate them.
+5. [Kiota.QuickStart](./KiotaExamples/Kiota.QuickStart) - project to call sample OpenAPI to generate data from provided
    file.
+6. [Kiota.AuthenticationExample](./KiotaExamples/Kiota.AuthenticationExample) - project to call OpenAPI with authentication
+   and show the data.
+7. [Kiota.SimpleApiCall](./KiotaExamples/Kiota.SimpleApiCall) - project to call OpenAPI with simple data and show them.
 
 [Docker files](./containers/Kiota-DemoApi) are available to build and run the application in containers. You can also
 leverage helper script [Compile-Containers.ps1](./scripts/Compile-Containers.ps1) to build containers
